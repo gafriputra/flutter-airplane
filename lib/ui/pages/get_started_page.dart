@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fluuter_airplane/shared/theme.dart';
+import 'package:fluuter_airplane/ui/widgets/custom_bottom.dart';
 
 class GetStartedPage extends StatelessWidget {
   const GetStartedPage({Key? key}) : super(key: key);
@@ -14,6 +15,7 @@ class GetStartedPage extends StatelessWidget {
             height: double.infinity,
             decoration: BoxDecoration(
                 image: DecorationImage(
+              fit: BoxFit.cover,
               image: AssetImage('assets/image_get_started.png'),
             )),
           ),
@@ -23,37 +25,23 @@ class GetStartedPage extends StatelessWidget {
               children: [
                 Text(
                   'Fly Like A Bird',
-                  style: whiteTextStyle.copyWith(
-                      fontSize: 32, fontWeight: semiBold),
+                  style: whiteTextStyle.copyWith(fontSize: 32, fontWeight: semiBold),
                 ),
                 SizedBox(
                   height: 10,
                 ),
                 Text(
                   'Explore new world with us and let\n let yourself get an amazing experiences',
-                  style:
-                      whiteTextStyle.copyWith(fontSize: 16, fontWeight: light),
+                  style: whiteTextStyle.copyWith(fontSize: 16, fontWeight: light),
                   textAlign: TextAlign.center,
                 ),
-                Container(
+                CustomBottom(
+                  title: 'Get Started',
                   width: 220,
-                  height: 55,
                   margin: EdgeInsets.only(top: 50, bottom: 80),
-                  child: TextButton(
-                    onPressed: () {
-                      Navigator.pushNamed(context, '/sign-up');
-                    },
-                    style: TextButton.styleFrom(
-                        backgroundColor: kPrimaryColor,
-                        shape: RoundedRectangleBorder(
-                            borderRadius:
-                                BorderRadius.circular(defaultRadius))),
-                    child: Text(
-                      'Get Started',
-                      style: whiteTextStyle.copyWith(
-                          fontSize: 18, fontWeight: medium),
-                    ),
-                  ),
+                  onPressed: () {
+                    Navigator.pushNamed(context, '/sign-up');
+                  },
                 )
               ],
             ),
