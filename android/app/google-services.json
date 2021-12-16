@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "332557823531",
+    "project_id": "airplane-e9e1e",
+    "storage_bucket": "airplane-e9e1e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:332557823531:android:88fbeaf796aead78f6c46e",
+        "android_client_info": {
+          "package_name": "com.example.fluuter_airplane"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "332557823531-qfqcn0q1fefjofvv3kbgq5irtuif3f4l.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA9DLY3opQUmFGXshf_2GZS_MevNSSy--Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "332557823531-qfqcn0q1fefjofvv3kbgq5irtuif3f4l.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
