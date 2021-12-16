@@ -66,7 +66,10 @@ class _SignUpPageState extends State<SignUpPage> {
       Widget tacButton() {
         return Container(
           alignment: Alignment.center,
-          margin: EdgeInsets.only(top: 50, bottom: 73),
+          margin: EdgeInsets.only(
+            top: 50,
+            bottom: 30,
+          ),
           child: Text(
             'Terms and Conditions',
             style: greyTextStyle.copyWith(fontSize: 16, fontWeight: light, decoration: TextDecoration.underline),

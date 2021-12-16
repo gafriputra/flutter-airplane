@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:fluuter_airplane/shared/theme.dart';
+import 'package:fluuter_airplane/ui/pages/choose_seat_page.dart';
+import 'package:fluuter_airplane/ui/widgets/custom_bottom.dart';
+import 'package:fluuter_airplane/ui/widgets/interest_item.dart';
 import 'package:fluuter_airplane/ui/widgets/photo_item.dart';
 
 class DetailPage extends StatelessWidget {
@@ -181,10 +184,90 @@ class DetailPage extends StatelessWidget {
                         ),
                       ],
                     ),
-                  )
+                  ),
+                  // Interest
+                  SizedBox(
+                    height: 20,
+                  ),
+                  Text(
+                    'Interest',
+                    style: blackTextStyle.copyWith(
+                      fontSize: 16,
+                      fontWeight: semiBold,
+                    ),
+                  ),
+                  SizedBox(
+                    height: 6,
+                  ),
+
+                  Row(
+                    children: [
+                      InterestItem(
+                        text: 'Ramah Lingkungan',
+                      ),
+                      InterestItem(
+                        text: 'Ramah Lingkungan',
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Row(
+                    children: [
+                      InterestItem(
+                        text: 'Ramah Lingkungan',
+                      ),
+                      InterestItem(
+                        text: 'Ramah Lingkungan',
+                      ),
+                    ],
+                  ),
                 ],
               ),
             ),
+
+            // Price and book bottom
+            Container(
+              margin: EdgeInsets.symmetric(vertical: 30),
+              width: double.infinity,
+              child: Row(
+                children: [
+                  // Price
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'IDR 250.000',
+                          style: blackTextStyle.copyWith(fontSize: 18, fontWeight: medium),
+                        ),
+                        SizedBox(
+                          height: 5,
+                        ),
+                        Text(
+                          'per orang',
+                          style: greenTextStyle.copyWith(fontWeight: light),
+                        ),
+                      ],
+                    ),
+                  ),
+                  // Bottom
+                  CustomBottom(
+                    title: 'Book Now',
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => ChooseSeatPage(),
+                        ),
+                      );
+                    },
+                    width: 170,
+                  ),
+                ],
+              ),
+            )
           ],
         ),
       );
@@ -192,12 +275,14 @@ class DetailPage extends StatelessWidget {
 
     return Scaffold(
       backgroundColor: kBackgroundColor,
-      body: Stack(
-        children: [
-          backgroundImage(),
-          customShadow(),
-          content(),
-        ],
+      body: SingleChildScrollView(
+        child: Stack(
+          children: [
+            backgroundImage(),
+            customShadow(),
+            content(),
+          ],
+        ),
       ),
     );
   }
