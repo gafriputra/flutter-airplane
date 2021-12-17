@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluuter_airplane/cubit/auth_cubit.dart';
+import 'package:fluuter_airplane/cubit/destination_cubit.dart';
+import 'package:fluuter_airplane/models/destination_model.dart';
 import 'package:fluuter_airplane/shared/theme.dart';
 import 'package:fluuter_airplane/ui/widgets/destination_card.dart';
 import 'package:fluuter_airplane/ui/widgets/destination_tile.dart';
@@ -14,9 +16,13 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   @override
-  Widget build(BuildContext context) {
-    List items = ['Waru', 'Sedati', 'Buduran', 'Siwalan', 'Semolowaru'];
+  void initState() {
+    context.read<DestinationCubit>().fetchDestinations();
+    super.initState();
+  }
 
+  @override
+  Widget build(BuildContext context) {
     Widget header() {
       return BlocBuilder<AuthCubit, AuthState>(
         builder: (context, state) {
@@ -60,17 +66,15 @@ class _HomePageState extends State<HomePage> {
       );
     }
 
-    Widget popularDestionation() {
+    Widget popularDestionation(List<DestinationModel> destinations) {
       return Container(
         margin: EdgeInsets.only(top: 30),
         child: SingleChildScrollView(
           scrollDirection: Axis.horizontal,
           child: Row(children: [
-            for (var item in items)
+            for (DestinationModel item in destinations)
               DestinationCard(
-                name: item,
-                imageUrl: 'assets/image_destination${items.indexOf(item) + 1}.png',
-                city: 'Sidoarjo',
+                destination: item,
               ),
             SizedBox(),
           ]),
@@ -78,7 +82,7 @@ class _HomePageState extends State<HomePage> {
       );
     }
 
-    Widget newDestination() {
+    Widget newDestination(List<DestinationModel> destinations) {
       return Container(
         margin: EdgeInsets.only(
           top: 30,
@@ -91,25 +95,44 @@ class _HomePageState extends State<HomePage> {
           children: [
             Text(
               'New This Year',
-              style: blackTextStyle.copyWith(fontSize: 18, fontWeight: semiBold),
+              style: blackTextStyle.copyWith(
+                fontSize: 18,
+                fontWeight: semiBold,
+              ),
             ),
-            for (var item in items)
+            for (DestinationModel item in destinations)
               DestinationTile(
-                name: item,
-                imageUrl: 'assets/image_destination${items.indexOf(item) + 5}.png',
-                city: 'Sidoarjo',
+                destination: item,
               ),
           ],
         ),
       );
     }
 
-    return ListView(
-      children: [
-        header(),
-        popularDestionation(),
-        newDestination(),
-      ],
+    return BlocConsumer<DestinationCubit, DestinationState>(
+      listener: (context, state) {
+        if (state is DestinationFail) {
+          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+            content: Text(state.error),
+            backgroundColor: kRedColor,
+          ));
+        }
+      },
+      builder: (context, state) {
+        if (state is DestinationSuccess) {
+          return ListView(
+            children: [
+              header(),
+              popularDestionation(state.destinations),
+              newDestination(state.destinations),
+            ],
+          );
+        } else {
+          return Center(
+            child: CircularProgressIndicator(),
+          );
+        }
+      },
     );
   }
 }
