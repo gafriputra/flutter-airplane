@@ -5,6 +5,7 @@ import 'package:fluuter_airplane/cubit/auth_cubit.dart';
 import 'package:fluuter_airplane/ui/pages/bonus_pages.dart';
 import 'package:fluuter_airplane/ui/pages/get_started_page.dart';
 import 'package:fluuter_airplane/ui/pages/main_page.dart';
+import 'package:fluuter_airplane/ui/pages/sign_in_page.dart';
 import 'package:fluuter_airplane/ui/pages/sign_up_page.dart';
 import 'package:fluuter_airplane/ui/pages/splash_page.dart';
 
@@ -36,6 +37,7 @@ class MyApp extends StatelessWidget {
           '/': (context) => SplashPage(),
           '/get-started': (context) => GetStartedPage(),
           '/sign-up': (context) => SignUpPage(),
+          '/sign-in': (context) => SignInPage(),
           '/bonus': (context) => BonusPage(),
           '/main': (context) => MainPage(),
         },

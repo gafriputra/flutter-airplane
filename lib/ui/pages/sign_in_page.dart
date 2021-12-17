@@ -5,21 +5,17 @@ import 'package:fluuter_airplane/shared/theme.dart';
 import 'package:fluuter_airplane/ui/widgets/custom_bottom.dart';
 import 'package:fluuter_airplane/ui/widgets/custom_text_form_field.dart';
 
-class SignUpPage extends StatefulWidget {
-  SignUpPage({Key? key}) : super(key: key);
+class SignInPage extends StatefulWidget {
+  SignInPage({Key? key}) : super(key: key);
 
   @override
-  _SignUpPageState createState() => _SignUpPageState();
+  _SignInPageState createState() => _SignInPageState();
 }
 
-class _SignUpPageState extends State<SignUpPage> {
-  TextEditingController nameController = TextEditingController(text: '');
-
+class _SignInPageState extends State<SignInPage> {
   TextEditingController emailController = TextEditingController(text: '');
 
   TextEditingController passwordController = TextEditingController(text: '');
-
-  TextEditingController hobbyController = TextEditingController(text: '');
 
   @override
   Widget build(BuildContext context) {
@@ -27,21 +23,13 @@ class _SignUpPageState extends State<SignUpPage> {
       return Container(
         margin: EdgeInsets.only(top: 30),
         child: Text(
-          'Join us and get\nyour next journey',
+          'Sign In with your\nexiting account',
           style: blackTextStyle.copyWith(fontSize: 24, fontWeight: semiBold),
         ),
       );
     }
 
     Widget inputSection() {
-      Widget nameInput() {
-        return CustomTextFormField(
-          title: 'Full Name',
-          hintText: 'Your Full Name',
-          controller: nameController,
-        );
-      }
-
       Widget emailInput() {
         return CustomTextFormField(
           title: 'Email Address',
@@ -59,21 +47,13 @@ class _SignUpPageState extends State<SignUpPage> {
         );
       }
 
-      Widget hobbyInput() {
-        return CustomTextFormField(
-          title: 'Hobby',
-          hintText: 'Your Hobby',
-          controller: hobbyController,
-        );
-      }
-
       Widget submitButton() {
         return BlocConsumer<AuthCubit, AuthState>(
           listener: (context, state) {
             if (state is AuthSuccess) {
               Navigator.pushNamedAndRemoveUntil(
                 context,
-                '/bonus',
+                '/main',
                 (route) => false,
               );
             } else if (state is AuthFailed) {
@@ -90,14 +70,12 @@ class _SignUpPageState extends State<SignUpPage> {
               );
             } else {
               return CustomBottom(
-                title: 'Get Started',
+                title: 'Sign In',
                 width: 220,
                 onPressed: () {
-                  context.read<AuthCubit>().signUp(
+                  context.read<AuthCubit>().signIn(
                         email: emailController.text,
-                        name: nameController.text,
                         password: passwordController.text,
-                        hobby: hobbyController.text,
                       );
                 },
               );
@@ -106,10 +84,10 @@ class _SignUpPageState extends State<SignUpPage> {
         );
       }
 
-      Widget signInButton() {
+      Widget signUpButton() {
         return GestureDetector(
           onTap: () {
-            Navigator.pushNamed(context, '/sign-in');
+            Navigator.pop(context);
           },
           child: Container(
             alignment: Alignment.center,
@@ -118,7 +96,7 @@ class _SignUpPageState extends State<SignUpPage> {
               bottom: 30,
             ),
             child: Text(
-              'Have an account? Sign in',
+              'Dont\'t have an account? Sign Up',
               style: greyTextStyle.copyWith(fontSize: 16, fontWeight: light, decoration: TextDecoration.underline),
             ),
           ),
@@ -131,12 +109,10 @@ class _SignUpPageState extends State<SignUpPage> {
         decoration: BoxDecoration(color: kWhiteColor, borderRadius: BorderRadius.circular(defaultRadius)),
         child: Column(
           children: [
-            nameInput(),
             emailInput(),
             passwordInput(),
-            hobbyInput(),
             submitButton(),
-            signInButton(),
+            signUpButton(),
           ],
         ),
       );

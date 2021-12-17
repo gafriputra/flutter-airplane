@@ -56,7 +56,7 @@ class DetailPage extends StatelessWidget {
               width: 108,
               height: 24,
               margin: EdgeInsets.only(
-                top: 30,
+                top: 60,
                 left: defaultMargin,
                 right: defaultMargin,
               ),
