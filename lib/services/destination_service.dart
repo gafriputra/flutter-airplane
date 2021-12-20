@@ -13,7 +13,6 @@ class DestinationService {
 
       return destinations;
     } catch (e) {
-      print(e.toString());
       throw e;
     }
   }

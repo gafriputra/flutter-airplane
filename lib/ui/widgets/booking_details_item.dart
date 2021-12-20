@@ -26,12 +26,14 @@ class BookingDetailsItem extends StatelessWidget {
             title,
             style: blackTextStyle,
           ),
-          Spacer(),
-          Text(
-            valueText,
-            style: blackTextStyle.copyWith(
-              fontWeight: semiBold,
-              color: valueColor,
+          Expanded(
+            child: Text(
+              valueText,
+              style: blackTextStyle.copyWith(
+                fontWeight: semiBold,
+                color: valueColor,
+              ),
+              textAlign: TextAlign.end,
             ),
           ),
         ],

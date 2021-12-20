@@ -14,14 +14,25 @@ class DestinationModel extends Equatable {
     this.price = 0,
   });
 
-  factory DestinationModel.fromJson(String id, Map<String, dynamic> json) => DestinationModel(
-        id: id,
-        name: json['name'],
-        city: json['city'],
-        imageUrl: json['imageUrl'],
-        rating: double.parse(json['rating']),
-        price: json['price'],
-      );
+  factory DestinationModel.fromJson(String id, Map<String, dynamic> json) {
+    return DestinationModel(
+      id: id,
+      name: json['name'],
+      city: json['city'],
+      imageUrl: json['imageUrl'],
+      rating: double.parse(json['rating'].toString()),
+      price: json['price'],
+    );
+  }
+
+  Map<String, dynamic> toJson() => {
+        'id': id,
+        'name': name,
+        'city': city,
+        'rating': rating,
+        'price': price,
+        'imageUrl': imageUrl,
+      };
 
   @override
   List<Object?> get props => [id, name, city, imageUrl, rating, price];
